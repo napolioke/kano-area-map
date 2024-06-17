@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kano, Kisumu County Map with Custom Popups</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 600px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Kano, Kisumu County Map with Custom Popups</h1>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map and set its view to Kano, Kisumu County, Kenya
+        var map = L.map('map').setView([-0.0567, 34.7636], 13);
+
+        // Add a tile layer from OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Example marker with a custom popup
+        var marker = L.marker([-0.0567, 34.7636]).addTo(map);
+        marker.bindPopup("<b>Kano</b><br>A region in Kisumu County.").openPopup();
+
+        // Additional marker with customized HTML content in the popup
+        var marker2 = L.marker([-0.0700, 34.7800]).addTo(map);
+        var customPopup = `
+            <div style="text-align: center;">
+                <h2>Local Market</h2>
+                <p>A bustling market in Kano.</p>
+                <img src="https://example.com/market.jpg" alt="Local Market" width="100%">
+            </div>
+        `;
+        marker2.bindPopup(customPopup);
+
+        // Another example marker
+        var marker3 = L.marker([-0.0400, 34.7500]).addTo(map);
+        marker3.bindPopup("<b>Kano Plains</b><br>A notable area in the region.").openPopup();
+
+        // You can also add popups without markers
+        var popup = L.popup()
+            .setLatLng([-0.0500, 34.7600])
+            .setContent("I am a standalone popup in Kano, Kisumu County.")
+            .openOn(map);
+    </script>
+</body>
+</html>
